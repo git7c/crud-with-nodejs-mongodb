@@ -1,0 +1,17 @@
+{
+  "name": "node_mongo",
+  "version": "1.0.0",
+  "description": "CRUD With NodeJS + MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Webtutorials.ME",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongodb": "^3.1.13",
+    "twig": "^1.13.2"
+  }
+}

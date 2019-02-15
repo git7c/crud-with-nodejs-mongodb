@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CRUD WITH MONGODB - Webtutorials.ME</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+        }
+        body{
+            margin: 0;
+            padding: 20px;
+            background-color: #f7f7f7;
+            font-family: sans-serif;
+        }
+        h1{
+            text-align: center;
+            color: #000000;
+        }
+        h1 span{
+            color: #2ecc71;
+        }
+        hr{
+            border-color: #ffffff;
+        }
+        .post-container,.form-container{
+            max-width: 600px;
+            padding: 10px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border: 1px solid rgba(0, 0, 0, .1);
+        }
+        .form-container label{
+            font-weight: bold;
+            color: #000000;
+        }
+        .input_style{
+            width: 100%;
+            padding: 10px;
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, .2);
+            outline: none;
+            border-radius: 2px;
+            font-family: sans-serif;
+            font-size: 16px;
+            resize: vertical;
+        }
+        .submit-btn{
+            margin: 10px 0;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            font-size: 14px;
+            cursor: pointer;
+            background: #ee4c58;
+            border: 1px solid rgba(0, 0, 0, .1);
+            color: #FFF;
+        }
+        .submit-btn:hover{
+            background-color: #232323;
+            color: #ffffff;
+        }
+
+
+        .post-container ul{
+            padding: 0;
+            margin: 5px 0;
+            list-style: none;
+            border-bottom: 1px solid #dddddd;
+        }
+        .post-container ul h3, .post-container ul p{
+            padding: 0;
+            margin: 0;
+        }
+        .post-container ul p{
+            color: #444444;
+        }
+        .post-container ul .edit-btn{
+            display: inline-block;
+            padding: 5px;
+            border: 1px solid rgba(0, 0, 0, .1);
+            margin: 5px 0;
+            color: #ffffff;
+            background-color: #11862f;
+            text-decoration: none;
+        }
+        .post-container ul .delete-btn{
+            display: inline-block;
+            padding: 5px;
+            border: 1px solid rgba(0, 0, 0, .1);
+            margin: 5px 0;
+            color: #ffffff;
+            background-color: #ff4c4c;
+            text-decoration: none; 
+        }
+        .date_author{
+            font-size: 14px;
+            color: #555;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="form-container">
+            <h1><span>Webtutorials</span>.ME</h1>
+            <!-- INSERT POST FORM -->
+            <form action="" method="POST">
+                <label for="title">Title</label>
+                <input type="text" class="input_style" name="title" id="title" placeholder="Enter post title" required>
+                <label for="content">Content</label>
+                <textarea name="content" id="content" class="input_style" placeholder="Write here" required></textarea>
+                <label for="author">Author Name</label>
+                <input type="text" id="author" name="author_name" class="input_style" placeholder="Author Name">
+                <input type="submit" value="Post" class="submit-btn">
+            </form>
+        </div>
+        <br>
+        <div class="post-container">
+            <!-- SHOW ALL POSTS -->
+            {%if posts%}
+                {% for post in posts %}
+                    <ul>
+                        <li>
+                            <h3 class="post-title">{{ post.title|e }}</h3>
+                            <span class="date_author">{{post.insert_date|date("M d, Y")}} | By, {{post.author_name|e}}</span>
+                            <p class="post-content">{{ post.content|e }}</p>
+                            <span class="post-action">
+                                <a href="/edit/{{ post._id}}" class="edit-btn">Edit</a>
+                                <a href="/delete/{{ post._id}}" class="delete-btn">Delete</a>
+                            </span>
+                        </li>
+                    </ul>
+                {% endfor %}
+            {%else%}
+            <h4>Oops empty!</h4>
+            <p>Write some posts</p>
+            {%endif%}
+        </div>
+    </div>
+</body>
+</html>
